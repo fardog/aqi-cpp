@@ -45,7 +45,7 @@ namespace AQI
         };
 
         Breakpoint *getBreakpoint();
-        BreakpointDef getBreakpointDef();
+        BreakpointDef *getBreakpointDef();
 
         static const int PM2_5_BREAKPOINT_COUNT;
         static Breakpoint PM2_5_BREAKPOINTS[7];

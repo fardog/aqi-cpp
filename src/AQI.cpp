@@ -30,11 +30,14 @@ Measurement::BreakpointDef Measurement::PM10_DEF = {PM10_BREAKPOINTS, PM10_BREAK
 
 Measurement::Breakpoint *Measurement::getBreakpoint()
 {
-    BreakpointDef def = getBreakpointDef();
+    BreakpointDef *def = getBreakpointDef();
+    if (!def) {
+        return nullptr;
+    }
 
-    for (int i = 0; i < def.count; i++)
+    for (int i = 0; i < def->count; i++)
     {
-        Breakpoint *bp = &def.breakpoints[i];
+        Breakpoint *bp = &def->breakpoints[i];
         if (value >= bp->min && value < bp->max)
         {
             return bp;
@@ -44,15 +47,17 @@ Measurement::Breakpoint *Measurement::getBreakpoint()
     return nullptr;
 }
 
-Measurement::BreakpointDef Measurement::getBreakpointDef()
+Measurement::BreakpointDef *Measurement::getBreakpointDef()
 {
     switch (pollutant)
     {
     case Pollutant::PM2_5:
-        return PM2_5_DEF;
+        return &PM2_5_DEF;
     case Pollutant::PM10:
-        return PM10_DEF;
+        return &PM10_DEF;
     }
+
+    return nullptr;
 }
 
 Pollutant Measurement::getPollutant()

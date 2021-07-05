@@ -20,8 +20,8 @@ namespace AQI
         float getValue();
 
     protected:
-        int value;
         Pollutant pollutant;
+        int value;
 
     private:
         struct Breakpoint
